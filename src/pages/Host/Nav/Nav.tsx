@@ -1,8 +1,8 @@
 import React from 'react';
-import './HostNav.css';
+import './Nav.css';
 import { NavLink } from 'react-router-dom';
 
-const HostNav: React.FC = () => {
+const Nav: React.FC = () => {
     return (
         <nav className="hostnav">
             <NavLink to="./" end className={({ isActive }) => (isActive ? "header-link active-link" : "header-link")}>
@@ -21,4 +21,4 @@ const HostNav: React.FC = () => {
     );
 };
 
-export default HostNav;
+export default Nav;

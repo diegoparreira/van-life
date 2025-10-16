@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './HostVanLayout.css';
 import HostVanHeader from './HostVanHeader/HostVanHeader';
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { Van } from '../../types/types';
+import HostVanNav from './HostVanNav/HostVanNav';
 
 const HostVanLayout: React.FC = ({ }) => {
     const { id } = useParams();
@@ -29,27 +30,7 @@ const HostVanLayout: React.FC = ({ }) => {
             </Link>
             <div className="host-van-card">
                 <HostVanHeader van={van} />
-                <nav className="header-links host-links">
-                    <NavLink
-                        to={`${id}`}
-                        end
-                        className={({ isActive }) => (isActive ? "header-link active-link" : "header-link")}
-                    >
-                        Details
-                    </NavLink>
-                    <NavLink
-                        to={`${id}/pricing`}
-                        className={({ isActive }) => (isActive ? "header-link active-link" : "header-link")}
-                    >
-                        Pricing
-                    </NavLink>
-                    <NavLink
-                        to={`${id}/photos`}
-                        className={({ isActive }) => (isActive ? "header-link active-link" : "header-link")}
-                    >
-                        Photos
-                    </NavLink>
-                </nav>
+                <HostVanNav id={id} />
                 <Outlet context={{ van }} />
             </div>
         </div >

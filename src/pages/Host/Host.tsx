@@ -1,6 +1,6 @@
 import React from 'react';
 import './Host.css';
-import HostNav from './HostNav/HostNav';
+import HostNav from './Nav/Nav';
 import { Outlet } from 'react-router-dom';
 
 const Host: React.FC = ({ }) => {

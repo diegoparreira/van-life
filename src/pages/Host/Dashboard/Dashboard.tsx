@@ -1,10 +1,10 @@
 import React from 'react';
-import './HostDashboard.css';
-import HostVansList from '../HostVansList/HostVansList';
+import './Dashboard.css';
+import VansList from '../common/VansList/VansList';
 
-const HostDashboard: React.FC = () => {
+const Dashboard: React.FC = () => {
     return (
-        <main className="hostdashboard">
+        <main className="dashboard">
             <section className="welcome-container">
                 <div className="welcome-info">
                     <h2>Welcome!</h2>
@@ -30,10 +30,10 @@ const HostDashboard: React.FC = () => {
                     <span className="vans-header-text">Your listed vans</span>
                     <div>View all</div>
                 </div>
-                <HostVansList editable />
+                <VansList editable />
             </section>
         </main>
     );
 };
 
-export default HostDashboard;
+export default Dashboard;

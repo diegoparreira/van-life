@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import './HostVansList.css';
-import { Van } from '../../../types/types';
 import { useNavigate } from 'react-router-dom';
+import './VansList.css';
+import { Van } from '../../../../types/types';
 
-interface HostVansListProps {
+interface VansListProps {
     editable?: boolean
 }
 
-interface HostVanProps {
+interface VanProps {
     van: Van
     editable: boolean
     handleClick: () => void
 }
 
-const HostVan: React.FC<HostVanProps> = ({ van, editable, handleClick }) => {
+const VanComponent: React.FC<VanProps> = ({ van, editable, handleClick }) => {
     const { id, imageUrl, name, price } = van;
     return (
         <li className="host-van-item" onClick={handleClick}>
@@ -31,7 +31,7 @@ const HostVan: React.FC<HostVanProps> = ({ van, editable, handleClick }) => {
     )
 }
 
-const HostVansList: React.FC<HostVansListProps> = ({ editable = false }) => {
+const VansList: React.FC<VansListProps> = ({ editable = false }) => {
     const [vans, setVans] = useState<Van[]>([]);
     const navigate = useNavigate();
 
@@ -51,11 +51,11 @@ const HostVansList: React.FC<HostVansListProps> = ({ editable = false }) => {
         <ul className="hostvans">
             {vans?.length > 0 && vans.map(van => {
                 return (
-                    <HostVan key={van.id} editable={editable} van={van} handleClick={() => handleClick(van.id)} />
+                    <VanComponent key={van.id} editable={editable} van={van} handleClick={() => handleClick(van.id)} />
                 )
             })}
         </ul>
     );
 };
 
-export default HostVansList;
+export default VansList;
