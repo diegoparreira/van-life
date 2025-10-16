@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './VansList.css';
 import { Van } from '../../../../types/types';
+import './VansList.css';
 
 interface VansListProps {
     editable?: boolean
+    onClick?: (id: number) => void
 }
 
 interface VanProps {
     van: Van
     editable: boolean
-    handleClick: () => void
+    onClick?: (id: number) => void
 }
 
-const VanComponent: React.FC<VanProps> = ({ van, editable, handleClick }) => {
+const VanComponent: React.FC<VanProps> = ({ van, editable, onClick }) => {
     const { id, imageUrl, name, price } = van;
+
+    const handleClick = (id: number) => {
+        if (onClick) {
+            onClick(id);
+        }
+    }
+
     return (
-        <li className="host-van-item" onClick={handleClick}>
+        <li className="host-van-item" onClick={() => handleClick(id)}>
             <div className="host-van-details">
                 <div className="host-van-image-container">
                     <img src={imageUrl} alt={`${name} picture`} />
@@ -31,9 +38,8 @@ const VanComponent: React.FC<VanProps> = ({ van, editable, handleClick }) => {
     )
 }
 
-const VansList: React.FC<VansListProps> = ({ editable = false }) => {
+const VansList: React.FC<VansListProps> = ({ editable = false, onClick = () => { } }) => {
     const [vans, setVans] = useState<Van[]>([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('/api/vans')
@@ -42,16 +48,12 @@ const VansList: React.FC<VansListProps> = ({ editable = false }) => {
             .catch(error => console.error(`Erro fetching vans. Error: ${error.message}`))
     }, []);
 
-    function handleClick(id: number) {
-        console.log("Clicked")
-        navigate(`/host/vans/${id}`);
-    }
 
     return (
         <ul className="hostvans">
             {vans?.length > 0 && vans.map(van => {
                 return (
-                    <VanComponent key={van.id} editable={editable} van={van} handleClick={() => handleClick(van.id)} />
+                    <VanComponent key={van.id} editable={editable} van={van} onClick={onClick} />
                 )
             })}
         </ul>

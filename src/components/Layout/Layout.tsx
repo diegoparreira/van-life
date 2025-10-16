@@ -7,11 +7,13 @@ import { Outlet } from 'react-router-dom';
 
 const Layout: React.FC = () => {
     return (
-        <>
+        <div className="layout-container">
             <Header />
-            <Outlet />
+            <main className="layout-content">
+                <Outlet />
+            </main>
             <Footer />
-        </>
+        </div>
     );
 };
 

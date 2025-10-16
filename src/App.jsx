@@ -17,29 +17,31 @@ import HostVanPhotos from "./pages/Host/Vans/HostVanPhotos/HostVanPhotos";
 
 function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route element={<Layout />}>
-                    <Route index element={<Home />} />
-                    <Route path="host" element={<Host />}>
-                        <Route index element={<HostDashboard />} />
-                        <Route path="vans">
-                            <Route index element={<HostVans />} />
-                            <Route element={<HostVanLayout />}>
-                                <Route path=":id" element={<HostVanDetail />} />
-                                <Route path=":id/pricing" element={<HostVanPricing />} />
-                                <Route path=":id/photos" element={<HostVanPhotos />} />
+        <div className="app-container">
+            <BrowserRouter>
+                <Routes>
+                    <Route element={<Layout />}>
+                        <Route index element={<Home />} />
+                        <Route path="host" element={<Host />}>
+                            <Route index element={<HostDashboard />} />
+                            <Route path="vans">
+                                <Route index element={<HostVans />} />
+                                <Route element={<HostVanLayout />}>
+                                    <Route path=":id" element={<HostVanDetail />} />
+                                    <Route path=":id/pricing" element={<HostVanPricing />} />
+                                    <Route path=":id/photos" element={<HostVanPhotos />} />
+                                </Route>
                             </Route>
+                            <Route path="income" element={<HostIncomes />} />
+                            <Route path="reviews" element={<HostReviews />} />
                         </Route>
-                        <Route path="income" element={<HostIncomes />} />
-                        <Route path="reviews" element={<HostReviews />} />
+                        <Route path="about" element={<About />} />
+                        <Route path="vans" element={<Vans />} />
+                        <Route path="vans/:id" element={<VanDetail />} />
                     </Route>
-                    <Route path="about" element={<About />} />
-                    <Route path="vans" element={<Vans />} />
-                    <Route path="vans/:id" element={<VanDetail />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
+                </Routes>
+            </BrowserRouter>
+        </div>
     );
 }
 
