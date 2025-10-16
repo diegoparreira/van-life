@@ -1,0 +1,48 @@
+.badge {
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px 20px;
+    display: inline-block;
+}
+
+.main-color {
+    background-color: #ffead0;
+    color: #4d4d4d;
+}
+
+.simple {
+    background-color: #e17654;
+    color: #ffead0;
+    font-weight: 300;
+}
+
+.rugged {
+    background-color: #115e59;
+    color: #ffead0;
+    font-weight: 300;
+}
+
+.luxury {
+    background-color: #161616;
+    color: #ffead0;
+    font-weight: 300;
+}
+
+.sm {
+    width: 70px;
+    height: 29px;
+}
+
+.md {
+    width: 86px;
+    height: 34px;
+}
+
+.lg {
+    width: 104px;
+    height: 37px;
+}

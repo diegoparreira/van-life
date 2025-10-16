@@ -1,0 +1,91 @@
+.vanlist-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff7ed;
+    padding: 0 27px;
+}
+
+.vanlist-header {
+    margin-top: 54px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 23px;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.clear-filters {
+    font-weight: 300;
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.vanlist-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 34px;
+    margin: 56px 0px;
+}
+
+.vanlist-item {
+    max-width: 230px;
+    list-style: none;
+}
+
+.image-container {
+    max-width: 230px;
+    width: 100%;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+.van-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.van-name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.van-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.price-text {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.day-text {
+    font-size: 14px;
+    font-weight: 500;
+}

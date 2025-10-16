@@ -1,0 +1,23 @@
+.van-card-image-container {
+    max-width: 160px;
+    width: 100%;
+}
+
+.van-card-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.van-card-header {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.van-card-header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}

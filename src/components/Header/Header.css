@@ -25,6 +25,11 @@
     color: #4d4d4d;
 }
 
+.active-link {
+    color: #161616;
+    text-decoration: underline;
+}
+
 .header-link:hover {
     color: #161616;
     text-decoration: underline;

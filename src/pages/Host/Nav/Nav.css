@@ -1,0 +1,8 @@
+.hostnav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    max-width: 1000px;
+    padding: 32px 1rem;
+    gap: 29px;
+}

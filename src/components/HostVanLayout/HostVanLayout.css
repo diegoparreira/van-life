@@ -1,0 +1,25 @@
+.hostvanlayout {
+    max-width: 1000px;
+    margin: 30px auto;
+    width: 80%;
+}
+
+.back-container {
+    display: flex;
+    flex-direction: row;
+    max-width: 142px;
+    align-items: center;
+    gap: 12px;
+    font-weight: 300;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.host-van-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 25px;
+    gap: 26px;
+    margin: 40px 0;
+}

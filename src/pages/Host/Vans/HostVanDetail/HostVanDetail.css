@@ -1,0 +1,6 @@
+.hostvandetail {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    font-size: 14px;
+}
