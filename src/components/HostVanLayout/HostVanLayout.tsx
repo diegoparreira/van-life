@@ -4,20 +4,32 @@ import HostVanHeader from './HostVanHeader/HostVanHeader';
 import { Link, Outlet, useParams } from 'react-router-dom';
 import { Van } from '../../types/types';
 import HostVanNav from './HostVanNav/HostVanNav';
+import { getVan } from '../../api';
+import Loading from '../Loading/Loading';
 
 const HostVanLayout: React.FC = ({ }) => {
     const { id } = useParams();
     const [van, setVan] = useState<Van | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        fetch(`/api/vans/${id}`)
-            .then(res => res.json())
-            .then(json => {
-                console.log(json);
-                setVan(json.vans);
-            })
-            .catch(err => console.error(`Error to fetch van with id ${id}. Error: ${err.message}`));
+        if (!id) throw Error("Id is mandatory");
+
+        async function loadVan(id: string) {
+            setIsLoading(true);
+            const van = await getVan(id);
+            setVan(van);
+            setIsLoading(false);
+        }
+
+        if (!id) return undefined;
+
+        loadVan(id);
     }, []);
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     return van ? (
         <div className="hostvanlayout" >

@@ -15,6 +15,8 @@ import HostVanLayout from "./components/HostVanLayout/HostVanLayout";
 import HostVanPricing from "./pages/Host/Vans/HostVanPricing/HostVanPricing";
 import HostVanPhotos from "./pages/Host/Vans/HostVanPhotos/HostVanPhotos";
 import NotFound from "./pages/NotFound/NotFound";
+import AuthRequired from "./components/AuthRequired/AuthRequired";
+import Login from "./pages/Login/Login";
 
 function App() {
     return (
@@ -23,24 +25,27 @@ function App() {
                 <Routes>
                     <Route element={<Layout />}>
                         <Route index element={<Home />} />
-                        <Route path="host" element={<Host />}>
-                            <Route index element={<HostDashboard />} />
-                            <Route path="vans">
-                                <Route index element={<HostVans />} />
-                                <Route path=":id" element={<HostVanLayout />}>
-                                    <Route index element={<HostVanDetail />} />
-                                    <Route path="pricing" element={<HostVanPricing />} />
-                                    <Route path="photos" element={<HostVanPhotos />} />
+                        <Route path="host" element={<AuthRequired />}>
+                            <Route path="" element={<Host />}>
+                                <Route index element={<HostDashboard />} />
+                                <Route path="vans">
+                                    <Route index element={<HostVans />} />
+                                    <Route path=":id" element={<HostVanLayout />}>
+                                        <Route index element={<HostVanDetail />} />
+                                        <Route path="pricing" element={<HostVanPricing />} />
+                                        <Route path="photos" element={<HostVanPhotos />} />
+                                    </Route>
                                 </Route>
+                                <Route path="income" element={<HostIncomes />} />
+                                <Route path="reviews" element={<HostReviews />} />
                             </Route>
-                            <Route path="income" element={<HostIncomes />} />
-                            <Route path="reviews" element={<HostReviews />} />
                         </Route>
                         <Route path="about" element={<About />} />
                         <Route path="vans">
                             <Route index element={<Vans />} />
                             <Route path=":id" element={<VanDetail />} />
                         </Route>
+                        <Route path="login" element={<Login />} />
                         <Route path="*" element={<NotFound />} />
                     </Route>
                 </Routes>

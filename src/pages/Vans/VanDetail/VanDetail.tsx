@@ -3,21 +3,34 @@ import './VanDetail.css';
 import Badge from '../../../components/Badge/Badge';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { Van } from '../../../types/types';
+import { getVan } from '../../../api';
+import Loading from '../../../components/Loading/Loading';
 
 const VanDetail: React.FC = () => {
     const [van, setVan] = useState<Van>();
+    const [isLoading, setIsLoading] = useState(false);
     const location = useLocation();
     const searchParams = location.state?.search || "";
     let { id } = useParams();
 
     useEffect(() => {
-        fetch(`/api/vans/${id}`)
-            .then((response) => response.json())
-            .then((data) => setVan(data.vans))
-            .catch((error) => console.error(`Error fetching vans. Error: ${error.message}`));
+        async function loadVan(id: string) {
+            setIsLoading(true);
+            const van = await getVan(id);
+            setVan(van);
+            setIsLoading(false);
+        }
+
+        if (!id) return undefined;
+
+        loadVan(id);
     }, []);
 
     const capitalizeType = van ? van.type.charAt(0).toUpperCase() + van.type.slice(1) : "";
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     return (
         <main className="vandetail-container">
