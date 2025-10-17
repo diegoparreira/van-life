@@ -3,4 +3,5 @@
     flex-direction: column;
     background-color: #fff7ed;
     width: 100%;
+    flex: 1;
 }

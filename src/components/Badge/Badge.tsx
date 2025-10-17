@@ -3,16 +3,16 @@ import './Badge.css';
 
 interface BadgeProps {
     pill?: boolean
-    color?: string
     size?: 'sm' | 'md' | 'lg';
-    children: ReactNode
+    className?: string;
+    children: ReactNode;
 }
 
-const Badge: React.FC<BadgeProps> = ({ pill = false, color = "main-color", size = "md", children }) => {
-    const className = `badge ${` ${color} ${size}`}`
+const Badge: React.FC<BadgeProps> = ({ pill = false, size = "md", className = 'main-color', children }) => {
+    const classNameStr = `badge ${`${size} ${className}`}`;
 
     return (
-        <div className={className}>
+        <div className={classNameStr} >
             {children}
         </div>
     );

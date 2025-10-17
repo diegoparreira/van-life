@@ -1,12 +1,27 @@
 .badge {
-    font-family: Inter;
+    height: 34px;
+    padding: 6px 26px;
+    font-style: normal;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    text-align: center;
+    border: none;
     border-radius: 5px;
-    padding: 8px 20px;
-    display: inline-block;
+    background-color: #ffead0;
+    padding: 7px 14px;
+    color: #4d4d4d;
+    transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+}
+
+.badge:hover {
+    color: #ffead0;
+}
+
+.badge:focus {
+    outline: none;
+}
+
+.badge.selected {
+    color: #ffead0;
 }
 
 .main-color {
@@ -14,19 +29,27 @@
     color: #4d4d4d;
 }
 
-.simple {
+.inactive {
+    background-color: #ffead0;
+    color: #4d4d4d;
+}
+
+.simple:hover,
+.simple.selected {
     background-color: #e17654;
     color: #ffead0;
     font-weight: 300;
 }
 
-.rugged {
+.rugged:hover,
+.rugged.selected {
     background-color: #115e59;
     color: #ffead0;
     font-weight: 300;
 }
 
-.luxury {
+.luxury:hover,
+.luxury.selected {
     background-color: #161616;
     color: #ffead0;
     font-weight: 300;

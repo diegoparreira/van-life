@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Van } from '../../../../types/types';
 import './VansList.css';
+import { getVans } from '../../../../api';
+import Loading from '../../../../components/Loading/Loading';
+import ErrorDetail from '../../../../components/ErrorDetail/ErrorDetail';
 
 interface VansListProps {
     editable?: boolean
@@ -40,14 +43,31 @@ const VanComponent: React.FC<VanProps> = ({ van, editable, onClick }) => {
 
 const VansList: React.FC<VansListProps> = ({ editable = false, onClick = () => { } }) => {
     const [vans, setVans] = useState<Van[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch('/api/vans')
-            .then(response => response.json())
-            .then(json => setVans(json.vans))
-            .catch(error => console.error(`Erro fetching vans. Error: ${error.message}`))
+        async function loadVans() {
+            setIsLoading(true);
+            try {
+                const vans = await getVans();
+                setVans(vans);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        loadVans();
     }, []);
 
+    if (isLoading) {
+        return <Loading />;
+    }
+
+    if (error) {
+        return <ErrorDetail error={error} />
+    }
 
     return (
         <ul className="hostvans">
