@@ -1,6 +1,6 @@
 import { createServer, Model, Response } from "miragejs";
 
-if (process.node.NODE_ENV === "development") {
+if (import.meta.env.VITE_ENV === "local") {
     createServer({
         models: {
             vans: Model,
