@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Badge from '../../components/Badge/Badge';
 import './Vans.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Van } from '../../types/types';
+import { genNewSearchParamsObj, genNewSearchParamString } from '../../utils/functions';
 
 const filterList = ["Simple", "Luxury", "Rugged"];
 
@@ -21,13 +22,16 @@ const VanItem: React.FC<Van> = ({ id, name, price, description, imageUrl, type }
                     <span className="day-text">/day</span>
                 </div>
             </div>
-            <Badge pill size="lg" color={type}>{capitalizeType}</Badge>
+            <Badge pill size="lg" className={`${type} selected`}>{capitalizeType}</Badge>
         </li>
     )
 }
 
 const Vans: React.FC = () => {
     const [vans, setVans] = useState<Van[]>([]);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const filterType = searchParams.get('type')?.toLocaleLowerCase();
 
     useEffect(() => {
         fetch("/api/vans")
@@ -36,19 +40,29 @@ const Vans: React.FC = () => {
             .catch((error) => console.error(`Error fetching vans. Error: ${error.message}`));
     }, []);
 
+    const displayedVans = filterType ? vans.filter(van => van.type === filterType) : vans;
+
     const filterOptions = filterList.map(filter => {
+        const filterLowerCase = filter.toLowerCase();
+        const searchParamString = genNewSearchParamString(searchParams, 'type', filter.toLowerCase());
         return (
-            <Badge key={filter} pill>
-                {filter}
+            <Badge
+                key={filter}
+                className={filterType === filterLowerCase ? `${filterLowerCase} selected` : `${filterLowerCase} inactive`}
+                size="lg"
+            >
+                <Link to={searchParamString}>{filter}</Link>
+                {/* <button onClick={() => genNewSearchParamsObj(searchParams, setSearchParams, 'type', filter.toLowerCase())}>{filter}</button> */}
             </Badge>
         )
     })
 
-    const vansElements = vans.map(van => {
-        return (
-            <Link key={van.id} to={`/vans/${van.id}`}><VanItem {...van} /></Link>
-        )
-    })
+    const vansElements = displayedVans
+        .map(van => {
+            return (
+                <Link key={van.id} to={`${van.id}`} state={{ search: searchParams.toString() }}><VanItem {...van} /></Link>
+            )
+        })
 
     return (
         <main className="vanlist-container">
@@ -57,7 +71,8 @@ const Vans: React.FC = () => {
                 <div className="filter-options">
                     {filterOptions}
                 </div>
-                <span className="clear-filters">Clear filters</span>
+                {filterType ? <Link to="." className="clear-filters">Clear filters</Link> : null}
+                {/* <button onClick={() => genNewSearchParamsObj(searchParams, setSearchParams, 'type', null)} className="clear-filters">Clear filters</button> */}
             </div>
             <ul className="vanlist-list">
                 {vansElements}

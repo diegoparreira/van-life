@@ -17,7 +17,7 @@ const HostVanHeader: React.FC<HostVanHeaderProps> = ({ van }) => {
                     <img src={van?.imageUrl} alt={`${van?.name} picture`} />
                 </div>
                 <div className="van-card-header-text">
-                    <Badge pill color={van?.type}>{capitalizeType}</Badge>
+                    <Badge pill className={`${van?.type} selected`}>{capitalizeType}</Badge>
                     <span className='host-van-name'>{van?.name}</span>
                     <span className="host-van-price">$<b>{van?.price}</b>/day</span>
                 </div>

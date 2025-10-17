@@ -10,20 +10,19 @@ const HostVanNav: React.FC<HostVanNavProps> = ({ id }) => {
     return (
         <nav className="header-links host-links">
             <NavLink
-                to={`${id}`}
-                end
+                to="." end
                 className={({ isActive }) => (isActive ? "header-link active-link" : "header-link")}
             >
                 Details
             </NavLink>
             <NavLink
-                to={`${id}/pricing`}
+                to="pricing"
                 className={({ isActive }) => (isActive ? "header-link active-link" : "header-link")}
             >
                 Pricing
             </NavLink>
             <NavLink
-                to={`${id}/photos`}
+                to="photos"
                 className={({ isActive }) => (isActive ? "header-link active-link" : "header-link")}
             >
                 Photos
