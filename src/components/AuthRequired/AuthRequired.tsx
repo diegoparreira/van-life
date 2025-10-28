@@ -6,12 +6,8 @@ import Loading from '../Loading/Loading';
 
 
 const AuthRequired: React.FC = ({ }) => {
-    const { isLoggedIn, isLoading } = useAuth();
+    const { isLoggedIn } = useAuth();
     const location = useLocation();
-
-    if (isLoading) {
-        return <Loading />;
-    }
 
     if (!isLoggedIn) {
         return (
