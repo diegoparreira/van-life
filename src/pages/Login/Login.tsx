@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import './Login.css';
 import { loginUser } from "../../api";
 import ErrorDetail from "../../components/ErrorDetail/ErrorDetail";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
@@ -10,25 +11,29 @@ export default function Login() {
     const [error, setError] = React.useState(null);
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location.state?.from ?? './host';
+    const { login, isLoggedIn } = useAuth();
+    const from = location.state?.from ?? '/host';
     const message = location.state?.message ?? null;
 
     useEffect(() => {
-        const logged = localStorage.getItem('logged');
+        if (isLoggedIn) {
+            navigate(from, { replace: true });
+        }
+    }, [isLoggedIn, from, navigate])
 
-        if (logged === 'true') navigate(from);
-    }, [])
-
-    function handleSubmit(e) {
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         setStatus("submitting");
         setError(null);
-        const user = loginUser(loginFormData)
+        loginUser(loginFormData)
             .then(data => {
                 console.log(data);
                 setStatus("idle");
                 setError(null);
-                localStorage.setItem('logged', 'true');
+                login({
+                    email: loginFormData.email,
+                    uid: data.uid || 'temp-id'
+                })
                 // Replace is used to remove login from history
                 navigate(from, { replace: true });
             })
@@ -38,7 +43,7 @@ export default function Login() {
             })
     }
 
-    function handleChange(e) {
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = e.target
         setLoginFormData(prev => ({
             ...prev,
